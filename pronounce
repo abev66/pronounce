@@ -1,0 +1,15 @@
+#!/bin/bash
+TTS_PATH=/usr/share/WyabdcRealPeopleTTS
+WORD=`echo $* | tr A-Z a-z`
+FALLBACK="espeak"
+PLAYER="play"
+
+for WORD2 in $WORD
+do 
+  TTS_PATH="${TTS_PATH}/${WORD2:0:1}/${WORD2}.wav"
+  if [ -f "$TTS_PATH" ]; then
+    $PLAYER $TTS_PATH 
+  else
+    echo "${WORD2}" | $FALLBACK
+  fi
+done
